@@ -334,6 +334,9 @@ const SECTIONS = [
 
 const TOTAL_QUESTIONS = SECTIONS.reduce((acc, s) => acc + s.questions.length, 0);
 
+const FONT = "'Avenir Next', 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+const FONT_DISPLAY = "'Bebas Neue', sans-serif";
+
 function TagSelector({ suggestions, value = [], onChange }) {
   const [custom, setCustom] = useState("");
   const toggle = (tag) => {
@@ -349,10 +352,10 @@ function TagSelector({ suggestions, value = [], onChange }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
         {suggestions.map((tag) => (
           <button key={tag} onClick={() => toggle(tag)} style={{
-            padding: "6px 14px", borderRadius: "20px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit",
-            background: value.includes(tag) ? "#1a1a1a" : "transparent",
+            padding: "6px 14px", borderRadius: "50px", fontSize: "13px", cursor: "pointer", fontFamily: FONT,
+            background: value.includes(tag) ? "#B4234B" : "transparent",
             color: value.includes(tag) ? "#fff" : "#1a1a1a",
-            border: "1.5px solid #1a1a1a", transition: "all 0.15s",
+            border: "1.5px solid " + (value.includes(tag) ? "#B4234B" : "#ccc"), transition: "all 0.15s",
             fontWeight: value.includes(tag) ? "600" : "400",
           }}>{tag}</button>
         ))}
@@ -361,8 +364,8 @@ function TagSelector({ suggestions, value = [], onChange }) {
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
           {value.filter(v => !suggestions.includes(v)).map(tag => (
             <span key={tag} style={{
-              padding: "6px 14px", borderRadius: "20px", fontSize: "13px",
-              background: "#1a1a1a", color: "#fff", border: "1.5px solid #1a1a1a",
+              padding: "6px 14px", borderRadius: "50px", fontSize: "13px",
+              background: "#B4234B", color: "#fff", border: "1.5px solid #B4234B",
               display: "flex", alignItems: "center", gap: "6px", fontWeight: "600",
             }}>
               {tag}
@@ -376,12 +379,12 @@ function TagSelector({ suggestions, value = [], onChange }) {
           onKeyDown={e => e.key === "Enter" && addCustom()}
           placeholder="Ajouter le votre..."
           style={{
-            flex: 1, padding: "8px 12px", borderRadius: "8px", border: "1.5px solid #ccc",
-            fontSize: "13px", fontFamily: "inherit", outline: "none",
+            flex: 1, padding: "8px 12px", borderRadius: "8px", border: "1.5px solid #ddd",
+            fontSize: "13px", fontFamily: FONT, outline: "none",
           }} />
         <button onClick={addCustom} style={{
-          padding: "8px 14px", borderRadius: "8px", background: "#1a1a1a", color: "#fff",
-          border: "none", cursor: "pointer", fontSize: "13px", fontFamily: "inherit",
+          padding: "8px 16px", borderRadius: "8px", background: "#B4234B", color: "#fff",
+          border: "none", cursor: "pointer", fontSize: "13px", fontFamily: FONT,
         }}>+</button>
       </div>
     </div>
@@ -394,10 +397,10 @@ function ChoiceSelector({ choices, value, onChange }) {
       {choices.map((c) => (
         <button key={c} onClick={() => onChange(c)} style={{
           padding: "12px 16px", borderRadius: "10px", textAlign: "left", cursor: "pointer",
-          fontFamily: "inherit", fontSize: "14px", transition: "all 0.15s",
-          background: value === c ? "#1a1a1a" : "transparent",
+          fontFamily: FONT, fontSize: "14px", transition: "all 0.15s",
+          background: value === c ? "#B4234B" : "transparent",
           color: value === c ? "#fff" : "#1a1a1a",
-          border: "1.5px solid " + (value === c ? "#1a1a1a" : "#ddd"),
+          border: "1.5px solid " + (value === c ? "#B4234B" : "#ddd"),
           fontWeight: value === c ? "600" : "400",
         }}>{c}</button>
       ))}
@@ -581,73 +584,73 @@ export default function App() {
   const isLast = sectionIdx === SECTIONS.length - 1 && questionIdx === section?.questions.length - 1;
 
   if (phase === "intro") return (
-    <div style={{ minHeight: "100vh", background: "#0e0e0e", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Georgia', 'Times New Roman', serif", padding: "24px" }}>
+    <div style={{ minHeight: "100vh", background: "#452D43", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FONT, padding: "24px" }}>
       <div style={{ maxWidth: "580px", width: "100%", textAlign: "center" }}>
-        <div style={{ fontSize: "13px", letterSpacing: "4px", textTransform: "uppercase", color: "#888", marginBottom: "32px", fontFamily: "'Helvetica Neue', sans-serif" }}>
-          Outil Communication TPE / PME
+        <div style={{ fontSize: "12px", letterSpacing: "4px", textTransform: "uppercase", color: "#A08098", marginBottom: "32px" }}>
+          Outil d'aide à la construction de votre master Prompt (Made by Ellevate)
         </div>
-        <h1 style={{ fontSize: "clamp(36px, 6vw, 56px)", color: "#f5f0e8", lineHeight: 1.15, marginBottom: "24px", fontWeight: "normal", letterSpacing: "-1px" }}>
+        <h1 style={{ fontSize: "clamp(42px, 7vw, 72px)", color: "#FFFFFF", lineHeight: 1.05, marginBottom: "24px", fontWeight: "400", fontFamily: FONT_DISPLAY, letterSpacing: "1px" }}>
           Construisez le Master Prompt de votre entreprise
         </h1>
-        <p style={{ fontSize: "17px", color: "#888", lineHeight: 1.7, marginBottom: "48px", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: "300" }}>
-          En {TOTAL_QUESTIONS} questions guidees, creez le document source qui permettra a votre agent IA de produire tous vos contenus marketing en respectant votre ton, votre positionnement et vos objectifs.
+        <p style={{ fontSize: "16px", color: "#D4B8D0", lineHeight: 1.7, marginBottom: "48px", fontWeight: "300" }}>
+          En {TOTAL_QUESTIONS} questions guidées, creez le document source qui permettra a votre agent IA d'épauler votre effort marketing en respectant votre ton, votre positionnement et vos objectifs.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "48px" }}>
           {SECTIONS.map(s => (
-            <div key={s.id} style={{ background: "#1a1a1a", borderRadius: "12px", padding: "14px 12px", textAlign: "center" }}>
+            <div key={s.id} style={{ background: "#3E253C", borderRadius: "12px", padding: "14px 12px", textAlign: "center", border: "1px solid rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: "20px", marginBottom: "6px" }}>{s.emoji}</div>
-              <div style={{ fontSize: "11px", color: "#666", fontFamily: "'Helvetica Neue', sans-serif", letterSpacing: "0.5px" }}>{s.title}</div>
+              <div style={{ fontSize: "11px", color: "#A08098", letterSpacing: "0.5px" }}>{s.title}</div>
             </div>
           ))}
         </div>
-        <button onClick={() => setPhase("quiz")} style={{ background: "#f5f0e8", color: "#0e0e0e", border: "none", padding: "18px 48px", borderRadius: "40px", fontSize: "15px", cursor: "pointer", fontFamily: "'Helvetica Neue', sans-serif", fontWeight: "600", letterSpacing: "0.5px" }}>
+        <button onClick={() => setPhase("quiz")} style={{ background: "#B4234B", color: "#fff", border: "none", padding: "18px 48px", borderRadius: "50px", fontSize: "15px", cursor: "pointer", fontFamily: FONT, fontWeight: "600", letterSpacing: "0.5px", transition: "opacity 0.2s" }}>
           Commencer
         </button>
-        <p style={{ marginTop: "16px", fontSize: "12px", color: "#555", fontFamily: "sans-serif" }}>
-          ~15 minutes - {TOTAL_QUESTIONS} questions - Donnees non envoyees
+        <p style={{ marginTop: "16px", fontSize: "12px", color: "#A08098" }}>
+          ~15 minutes - {TOTAL_QUESTIONS} questions - Données non envoyées
         </p>
       </div>
     </div>
   );
 
   if (phase === "result") return (
-    <div style={{ minHeight: "100vh", background: "#0e0e0e", fontFamily: "'Helvetica Neue', sans-serif", padding: "24px" }}>
+    <div style={{ minHeight: "100vh", background: "#452D43", fontFamily: FONT, padding: "24px" }}>
       <div style={{ maxWidth: "760px", margin: "0 auto" }}>
         <div style={{ textAlign: "center", padding: "48px 0 32px" }}>
           <div style={{ fontSize: "48px", marginBottom: "16px" }}>✅</div>
-          <h1 style={{ color: "#f5f0e8", fontSize: "32px", fontWeight: "300", marginBottom: "8px" }}>
-            Votre Master Prompt est pret
+          <h1 style={{ color: "#FFFFFF", fontSize: "clamp(28px, 4vw, 40px)", fontWeight: "400", fontFamily: FONT_DISPLAY, letterSpacing: "1px", marginBottom: "8px" }}>
+            Votre Master Prompt est prêt
           </h1>
-          <p style={{ color: "#888", fontSize: "15px" }}>
+          <p style={{ color: "#D4B8D0", fontSize: "15px" }}>
             Copiez-le dans le champ Instructions systeme de votre agent IA favori.
           </p>
         </div>
-        <div style={{ background: "#1a1a1a", borderRadius: "16px", padding: "32px", marginBottom: "24px", border: "1px solid #2a2a2a" }}>
+        <div style={{ background: "#3E253C", borderRadius: "16px", padding: "32px", marginBottom: "24px", border: "1px solid rgba(255,255,255,0.1)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-            <span style={{ color: "#888", fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase" }}>Document source</span>
-            <button onClick={copyPrompt} style={{ background: copied ? "#2d6a4f" : "#f5f0e8", color: copied ? "#fff" : "#0e0e0e", border: "none", padding: "10px 20px", borderRadius: "8px", cursor: "pointer", fontSize: "13px", fontWeight: "600", transition: "all 0.2s" }}>
-              {copied ? "Copie !" : "Copier le prompt"}
+            <span style={{ color: "#A08098", fontSize: "12px", letterSpacing: "2px", textTransform: "uppercase" }}>Document source</span>
+            <button onClick={copyPrompt} style={{ background: copied ? "#2d6a4f" : "#B4234B", color: "#fff", border: "none", padding: "10px 20px", borderRadius: "50px", cursor: "pointer", fontSize: "13px", fontWeight: "600", fontFamily: FONT, transition: "all 0.2s" }}>
+              {copied ? "Copié !" : "Copier le prompt"}
             </button>
           </div>
-          <pre style={{ color: "#c8b89a", fontSize: "12px", lineHeight: 1.7, whiteSpace: "pre-wrap", wordBreak: "break-word", maxHeight: "500px", overflowY: "auto", fontFamily: "'Courier New', monospace" }}>
+          <pre style={{ color: "#F0D4DC", fontSize: "12px", lineHeight: 1.7, whiteSpace: "pre-wrap", wordBreak: "break-word", maxHeight: "500px", overflowY: "auto", fontFamily: "'Courier New', monospace" }}>
             {masterPrompt}
           </pre>
         </div>
-        <div style={{ background: "#1a1a1a", borderRadius: "16px", padding: "24px", border: "1px solid #2a2a2a", marginBottom: "32px" }}>
-          <h3 style={{ color: "#f5f0e8", fontSize: "16px", marginBottom: "16px", fontWeight: "500" }}>
+        <div style={{ background: "#3E253C", borderRadius: "16px", padding: "24px", border: "1px solid rgba(255,255,255,0.1)", marginBottom: "32px" }}>
+          <h3 style={{ color: "#FFFFFF", fontSize: "16px", marginBottom: "16px", fontWeight: "600" }}>
             Comment utiliser ce prompt ?
           </h3>
-          <ol style={{ color: "#888", fontSize: "14px", lineHeight: 2, paddingLeft: "20px", margin: 0 }}>
+          <ol style={{ color: "#D4B8D0", fontSize: "14px", lineHeight: 2, paddingLeft: "20px", margin: 0 }}>
             <li>Copiez l'integralite du prompt ci-dessus</li>
-            <li>Ouvrez votre outil IA (Claude, ChatGPT, Mistral...)</li>
-            <li>Creez un nouvel agent personnalise</li>
-            <li>Collez-le dans le champ "Instructions systeme"</li>
+            <li>Ouvrez votre outil IA (Claude, ChatGPT, Mistral, Copilot...)</li>
+            <li>Creez un nouvel agent personnalisé</li>
+            <li>Collez-le dans le champ "Instructions systeme" ou ajoutez le en ressource d'un prompt système spécifique</li>
             <li>Nommez-le (ex : Agent comm NomEntreprise) et enregistrez</li>
-            <li>Demandez-lui de creer vos posts, emails, fiches produits... Il parlera au nom de votre entreprise</li>
+            <li>Demandez-lui de créer des emails de follow up, de vous proposer des thématiques connexes pour vos idées de posts... Il parlera au nom de votre entreprise</li>
           </ol>
         </div>
         <div style={{ textAlign: "center" }}>
-          <button onClick={() => { setPhase("quiz"); setSectionIdx(0); setQuestionIdx(0); }} style={{ background: "transparent", color: "#888", border: "1px solid #333", padding: "12px 24px", borderRadius: "8px", cursor: "pointer", fontSize: "13px" }}>
+          <button onClick={() => { setPhase("quiz"); setSectionIdx(0); setQuestionIdx(0); }} style={{ background: "transparent", color: "#D4B8D0", border: "1px solid rgba(255,255,255,0.2)", padding: "12px 24px", borderRadius: "50px", cursor: "pointer", fontSize: "13px", fontFamily: FONT }}>
             Modifier mes reponses
           </button>
         </div>
@@ -656,41 +659,41 @@ export default function App() {
   );
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f0e8", display: "flex", flexDirection: "column", fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
-      <div style={{ height: "3px", background: "#e0d8cc", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}>
-        <div style={{ height: "100%", background: "#1a1a1a", width: `${(globalStep / TOTAL_QUESTIONS) * 100}%`, transition: "width 0.4s ease" }} />
+    <div style={{ minHeight: "100vh", background: "#452D43", display: "flex", flexDirection: "column", fontFamily: FONT }}>
+      <div style={{ height: "3px", background: "rgba(255,255,255,0.1)", position: "fixed", top: 0, left: 0, right: 0, zIndex: 100 }}>
+        <div style={{ height: "100%", background: "#B4234B", width: `${(globalStep / TOTAL_QUESTIONS) * 100}%`, transition: "width 0.4s ease" }} />
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 32px", borderBottom: "1px solid #e0d8cc", background: "#f5f0e8", position: "sticky", top: 0, zIndex: 50 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 32px", borderBottom: "1px solid rgba(255,255,255,0.1)", background: "#452D43", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <span style={{ fontSize: "20px" }}>{section.emoji}</span>
-          <span style={{ fontSize: "13px", color: "#888", letterSpacing: "0.5px" }}>{section.title}</span>
+          <span style={{ fontSize: "13px", color: "#D4B8D0", letterSpacing: "0.5px" }}>{section.title}</span>
         </div>
-        <div style={{ fontSize: "12px", color: "#aaa" }}>{globalStep} / {TOTAL_QUESTIONS}</div>
+        <div style={{ fontSize: "12px", color: "#A08098" }}>{globalStep} / {TOTAL_QUESTIONS}</div>
       </div>
 
-      <div style={{ display: "flex", gap: "4px", padding: "12px 32px", overflowX: "auto", borderBottom: "1px solid #e0d8cc", background: "#f5f0e8" }}>
+      <div style={{ display: "flex", gap: "4px", padding: "12px 32px", overflowX: "auto", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "#452D43" }}>
         {SECTIONS.map((s, i) => (
           <div key={s.id} style={{
-            display: "flex", alignItems: "center", gap: "5px", padding: "5px 12px", borderRadius: "20px", fontSize: "12px",
-            background: i === sectionIdx ? "#1a1a1a" : i < sectionIdx ? "#d4cfc7" : "transparent",
-            color: i === sectionIdx ? "#fff" : i < sectionIdx ? "#555" : "#bbb",
+            display: "flex", alignItems: "center", gap: "5px", padding: "5px 12px", borderRadius: "50px", fontSize: "12px",
+            background: i === sectionIdx ? "#B4234B" : i < sectionIdx ? "rgba(255,255,255,0.1)" : "transparent",
+            color: i === sectionIdx ? "#fff" : i < sectionIdx ? "#D4B8D0" : "#A08098",
             whiteSpace: "nowrap", fontWeight: i === sectionIdx ? "600" : "400", transition: "all 0.2s",
           }}>
             <span>{s.emoji}</span>
             {i === sectionIdx && <span>{s.title}</span>}
-            {i < sectionIdx && <span style={{ fontSize: "10px" }}>ok</span>}
+            {i < sectionIdx && <span style={{ fontSize: "10px" }}>✓</span>}
           </div>
         ))}
       </div>
 
       <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "32px 24px" }}>
         <div style={{ maxWidth: "600px", width: "100%" }}>
-          <div style={{ background: "#fff", borderRadius: "20px", padding: "36px", boxShadow: "0 4px 32px rgba(0,0,0,0.06)", border: "1px solid #e8e0d4" }}>
-            <div style={{ fontSize: "11px", color: "#bbb", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "20px" }}>
+          <div style={{ background: "#fff", borderRadius: "20px", padding: "36px", boxShadow: "0 8px 40px rgba(0,0,0,0.25)" }}>
+            <div style={{ fontSize: "11px", color: "#A08098", letterSpacing: "3px", textTransform: "uppercase", marginBottom: "20px" }}>
               Question {questionIdx + 1} / {section.questions.length}
             </div>
-            <h2 style={{ fontSize: "20px", color: "#1a1a1a", lineHeight: 1.45, marginBottom: "12px", fontWeight: "500", letterSpacing: "-0.3px" }}>
+            <h2 style={{ fontSize: "20px", color: "#1a1a1a", lineHeight: 1.45, marginBottom: "12px", fontWeight: "600", fontFamily: FONT }}>
               {question.text}
             </h2>
             {question.hint && (
@@ -705,7 +708,7 @@ export default function App() {
                 onChange={e => setCurrentValue(e.target.value)}
                 onKeyDown={e => e.key === "Enter" && canNext() && goNext()}
                 placeholder={question.placeholder}
-                style={{ width: "100%", padding: "14px 16px", borderRadius: "10px", border: "1.5px solid #e0d8cc", fontSize: "15px", fontFamily: "inherit", outline: "none", color: "#1a1a1a", background: "#fdfaf6", boxSizing: "border-box" }}
+                style={{ width: "100%", padding: "14px 16px", borderRadius: "10px", border: "1.5px solid #e8dde6", fontSize: "15px", fontFamily: FONT, outline: "none", color: "#1a1a1a", background: "#fdf8fc", boxSizing: "border-box" }}
               />
             )}
             {question.type === "textarea" && (
@@ -714,24 +717,24 @@ export default function App() {
                 onChange={e => setCurrentValue(e.target.value)}
                 placeholder={question.placeholder}
                 rows={4}
-                style={{ width: "100%", padding: "14px 16px", borderRadius: "10px", border: "1.5px solid #e0d8cc", fontSize: "15px", fontFamily: "inherit", outline: "none", color: "#1a1a1a", background: "#fdfaf6", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }}
+                style={{ width: "100%", padding: "14px 16px", borderRadius: "10px", border: "1.5px solid #e8dde6", fontSize: "15px", fontFamily: FONT, outline: "none", color: "#1a1a1a", background: "#fdf8fc", resize: "vertical", lineHeight: 1.6, boxSizing: "border-box" }}
               />
             )}
             {question.type === "tags" && <TagSelector suggestions={question.suggestions} value={currentValue} onChange={setCurrentValue} />}
             {question.type === "choice" && <ChoiceSelector choices={question.choices} value={currentValue} onChange={setCurrentValue} />}
 
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "28px" }}>
-              <button onClick={goPrev} disabled={isFirst} style={{ background: "transparent", color: "#aaa", border: "1px solid #e0d8cc", padding: "11px 20px", borderRadius: "8px", cursor: "pointer", fontSize: "13px", opacity: isFirst ? 0.3 : 1 }}>
-                Precedent
+              <button onClick={goPrev} disabled={isFirst} style={{ background: "transparent", color: "#aaa", border: "1px solid #e8dde6", padding: "11px 20px", borderRadius: "50px", cursor: "pointer", fontSize: "13px", fontFamily: FONT, opacity: isFirst ? 0.3 : 1 }}>
+                Précédent
               </button>
               <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
                 {!canNext() && (
-                  <button onClick={goNext} style={{ background: "transparent", color: "#bbb", border: "none", cursor: "pointer", fontSize: "12px", padding: "4px" }}>
+                  <button onClick={goNext} style={{ background: "transparent", color: "#bbb", border: "none", cursor: "pointer", fontSize: "12px", padding: "4px", fontFamily: FONT }}>
                     Passer
                   </button>
                 )}
-                <button onClick={goNext} disabled={!canNext()} style={{ background: canNext() ? "#1a1a1a" : "#e0d8cc", color: canNext() ? "#fff" : "#aaa", border: "none", padding: "12px 28px", borderRadius: "10px", cursor: canNext() ? "pointer" : "not-allowed", fontSize: "14px", fontWeight: "600", transition: "all 0.2s", fontFamily: "inherit" }}>
-                  {isLast ? "Generer mon Master Prompt" : "Suivant"}
+                <button onClick={goNext} disabled={!canNext()} style={{ background: canNext() ? "#B4234B" : "#e8dde6", color: canNext() ? "#fff" : "#bbb", border: "none", padding: "12px 28px", borderRadius: "50px", cursor: canNext() ? "pointer" : "not-allowed", fontSize: "14px", fontWeight: "600", transition: "all 0.2s", fontFamily: FONT }}>
+                  {isLast ? "Générer mon Master Prompt" : "Suivant"}
                 </button>
               </div>
             </div>
@@ -739,7 +742,7 @@ export default function App() {
 
           <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "24px" }}>
             {section.questions.map((_, i) => (
-              <div key={i} style={{ width: i === questionIdx ? "24px" : "8px", height: "8px", borderRadius: "4px", transition: "all 0.3s", background: i < questionIdx ? "#888" : i === questionIdx ? "#1a1a1a" : "#d4cfc7" }} />
+              <div key={i} style={{ width: i === questionIdx ? "24px" : "8px", height: "8px", borderRadius: "4px", transition: "all 0.3s", background: i < questionIdx ? "#D4B8D0" : i === questionIdx ? "#B4234B" : "rgba(255,255,255,0.2)" }} />
             ))}
           </div>
         </div>
